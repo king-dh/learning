@@ -10,6 +10,11 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/activity/index',
+      name: 'activity',
+      component: () => import("@/views/activity")
     }
   ]
 })
