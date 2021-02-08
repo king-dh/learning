@@ -1,7 +1,6 @@
 <template>
 <div>
     <div>欢迎</div>
-    <button>Login<button>
     <button @click="routerHandle">Login</button>
 </div>
 </template>
