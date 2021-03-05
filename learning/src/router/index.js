@@ -15,6 +15,11 @@ export default new Router({
       path: '/activity/index',
       name: 'activity',
       component: () => import("@/views/activity")
+    },
+    {
+      path: '/test1',
+      name: 'activity',
+      component: () => import("@/views/page/test1")
     }
   ]
 })
