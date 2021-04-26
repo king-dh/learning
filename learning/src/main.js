@@ -8,6 +8,7 @@ import 'view-design/dist/styles/iview.css';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import moment from "moment";
+import store from './store/index'
 
 Vue.use(ViewUI);
 
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
