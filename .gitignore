@@ -1,0 +1,35 @@
+# ===== Java / Maven =====
+target/
+*.class
+*.jar
+*.war
+*.log
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+
+# ===== Node / Vite =====
+node_modules/
+dist/
+.vite/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== IDE =====
+.vscode/
+*.swp
+*.swo
+
+# ===== Env =====
+.env
+.env.local
+
+# ===== Scripts =====
+fix_scripts/
+
+# ===== IDE Specs =====
+.trae/

@@ -1,0 +1,74 @@
+# ============================================================
+# 服务器配置
+# ============================================================
+server:
+  port: 8088  # 应用启动端口
+
+# ============================================================
+# Spring 核心配置
+# ============================================================
+spring:
+  # SQL 初始化配置（启动时自动执行 schema.sql 建表 + data.sql 或 DataInitializer 插入数据）
+  sql:
+    init:
+      mode: always  # 每次都执行初始化 SQL（生产环境建议改为 never，使用 Flyway/Liquibase）
+      continue-on-error: false  # 遇到 SQL 错误时停止启动
+
+  # 数据源配置（连接 MySQL 数据库）
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL JDBC 驱动类
+    url: jdbc:mysql://127.0.0.1:3306/learning?createDatabaseIfNotExist=true&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true  # 数据库连接地址，createDatabaseIfNotExist=true 表示如果数据库不存在则自动创建
+    username: root  # 数据库用户名
+    password: skydave2020DH  # 数据库密码
+    type: com.zaxxer.hikari.HikariDataSource  # 使用 HikariCP 连接池（Spring Boot 默认）
+    hikari:
+      minimum-idle: 5       # 连接池最小空闲连接数
+      maximum-pool-size: 20 # 连接池最大连接数
+      idle-timeout: 300000  # 空闲连接超时时间（毫秒）
+      max-lifetime: 1200000 # 连接最大生存时间（毫秒）
+
+# ============================================================
+# MyBatis-Plus 配置
+# ============================================================
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 控制台输出 SQL 日志，方便调试
+    map-underscore-to-camel-case: true  # 数据库字段下划线命名 → Java 实体驼峰命名自动映射
+  global-config:
+    db-config:
+      id-type: auto  # 主键自增策略
+
+# ============================================================
+# JWT 认证配置
+# ============================================================
+jwt:
+  # JWT 签名密钥（Base64 编码，256 位）
+  secret: nCOfCUJcKIb6lJjVFOcFuak/Spag1laSEBkYp+S99Lk=
+  # JWT Token 过期时间（毫秒），86400000 = 24 小时
+  expiration: 86400000
+
+# ============================================================
+# 日志配置
+# ============================================================
+logging:
+  level:
+    com.example.backend: DEBUG  # 项目包下的日志级别设为 DEBUG
+    org.springframework.security: DEBUG  # Spring Security 日志级别
+
+# ============================================================
+# SpringDoc OpenAPI 接口文档配置（Swagger UI）
+# ============================================================
+springdoc:
+  swagger-ui:
+    enabled: true  # 启用 Swagger UI
+    path: /swagger-ui.html  # Swagger UI 访问路径
+    tags-sorter: alpha  # 按字母排序标签
+    operations-sorter: alpha  # 按字母排序接口
+  api-docs:
+    enabled: true  # 启用 OpenAPI JSON 接口
+    path: /v3/api-docs  # OpenAPI JSON 数据路径
+  # 分组配置（可按模块分组）
+  group-configs:
+    - group: 'default'  # 默认分组
+      paths-to-match: '/api/**'  # 扫描 /api/** 下的接口
+      packages-to-scan: com.example.backend.controller  # 扫描的 Controller 包
