@@ -44,13 +44,13 @@
 
       <div class="pagination">
         <el-pagination
-          v-model:current-page="pagination.page"
-          v-model:page-size="pagination.size"
+          :current-page="pagination.page"
+          :page-size="pagination.size"
+          @update:current-page="pagination.page = $event; fetchData()"
+          @update:page-size="pagination.size = $event; fetchData()"
           :total="pagination.total"
           :page-sizes="[10, 20, 50]"
           layout="total, sizes, prev, pager, next"
-          @size-change="fetchData"
-          @current-change="fetchData"
         />
       </div>
     </el-card>
